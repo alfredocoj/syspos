@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block titulo %}Lista de Professores{% endblock %}
+
+{% block conteudo %}
+<link href="{{ MEDIA_URL }}styles/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+
+<style type="text/css" title="currentStyle">
+    @import "{{ MEDIA_URL }}datatables/css/demo_page.css";
+    @import "{{ MEDIA_URL }}datatables/css/demo_table.css";
+    @import "{{ MEDIA_URL }}datatables/css/jquery.dataTables.css";
+</style>
+
+<div id="content">
+    <p>
+        <a href="#frmModal" class="btn btn-primary" data-toggle="modal">
+            <i class="icon-plus icon-white"></i> Incluir
+        </a>
+    </p>
+    <hr/>
+    <div id="dynamic">
+        <table id="tblDados" class="display" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th width="40%">Nome</th>
+                    <th width="15%">CPF</th>
+                    <th width="15%">Telefone 1</th>
+                    <th width="15%">E-Mail 1</th>
+                    <th width="15%">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for professor in professores %}
+                <tr class="{% cycle 'odd' 'even' %}">
+                    <td>{{ professor.nome }}</td>
+                    <td>{{ professor.cpf }}</td>
+                    <td>{{ professor.telefone1 }}</td>
+                    <td>{{ professor.email1 }}</td>
+                    <td>
+                        <a href="/academico/professores/{{professor.id}}/" class="btn btn-success btn-small">
+                            <i class="icon-folder-open icon-white"></i>
+                        </a>
+                        <a href="/academico/professores/{{professor.id}}/editar/" class="btn btn-warning btn-small">
+                            <i class="icon-edit icon-white"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone 1</th>
+                    <th>E-Mail 1</th>
+                    <th>Ações</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    {% include "cadastros.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+    class Entry(models.Model):
+        LIVE_STATUS = 1
+        DRAFT_STATUS = 2
+        HIDDEN_STATUS = 3
+        STATUS_CHOICES = (
+            (LIVE_STATUS, 'Live'),
+            (DRAFT_STATUS, 'Draft'),
+            (HIDDEN_STATUS, 'Hidden'),
+        )
+        # ...some other fields here...
+        status = models.IntegerField(choices=STATUS_CHOICES, default=LIVE_STATUS)
+
+    live_entries = Entry.objects.filter(status=Entry.LIVE_STATUS)
+    draft_entries = Entry.objects.filter(status=Entry.DRAFT_STATUS)
+
+    if entry_object.status == Entry.LIVE_STATUS:
+
+

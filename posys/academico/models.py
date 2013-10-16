@@ -229,3 +229,23 @@ class Registros(models.Model):
     class Meta:
         db_table = 'registros'
 
+class Turmas(models.Model):
+    id = models.AutoField(primary_key=True)
+    ano = models.CharField(max_length=4L)
+    SEMESTRE_PRIMEIRO = 1
+    SEMESTRE_SEGUNDO = 2
+    OPCOES_SEMESTRE = (
+            (SEMESTRE_PRIMEIRO, 'Primeiro'),
+            (SEMESTRE_SEGUNDO, 'Segundo'),
+        )    
+    #semestre = models.CharField(max_length=8L)
+    semestre = models.IntegerField(choices=OPCOES_SEMESTRE, default=SEMESTRE_PRIMEIRO)
+    cursos = models.ForeignKey(Cursos)
+    curriculos = models.ForeignKey(Curriculos)
+    class Meta:
+        db_table = 'turmas'
+        ordering = ['-ano']
+    def __unicode__(self):
+        return u'%s' % (self.nome)
+    def get_absolute_url(self):
+        return '#'

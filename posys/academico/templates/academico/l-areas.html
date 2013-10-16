@@ -5,11 +5,12 @@
 {% block conteudo %}
 
 <ul class="nav nav-tabs">
-	<li><a href="/academico/cursos/{{curso.id}}/">Geral</a></li>
-	<li class="active"><a href="/academico/cursos/{{curso.id}}/areas/">Áreas</a></li>
-	<li><a href="/academico/cursos/{{curso.id}}/disciplinas/">Disciplinas</a></li>
-	<li><a href="/academico/cursos/{{curso.id}}/curriculos/">Curriculos</a></li>
-	<li><a href="#">Períodos Letivos</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/">Geral</a></li>
+    <li class="active"><a href="/academico/cursos/{{curso.id}}/areas/">Áreas</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/disciplinas/">Disciplinas</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/curriculos/">Curriculos</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/turmas/">Turmas</a></li>
+    <li><a href="#">Períodos Letivos</a></li>
 </ul>
 
 <link href="{{ MEDIA_URL }}styles/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
@@ -40,8 +41,8 @@
                 <tr class="{% cycle 'odd' 'even' %}">
                     <td>{{ area.nome }}</td>
                     <td>
-                    	<a href="#" class="btn btn-warning btn-small"><i class="icon-edit icon-white"></i></a>
-                    	<a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
+                        <a href="#" class="btn btn-warning btn-small"><i class="icon-edit icon-white"></i></a>
+                        <a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
                     </td>
                 </tr>
             {% endfor %}

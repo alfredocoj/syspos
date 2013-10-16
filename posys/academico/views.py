@@ -11,6 +11,7 @@ from academico.models import Areas
 from academico.models import Disciplinas
 from academico.models import Curriculos
 from academico.models import Cidades
+from academico.models import Turmas
 
 def home(request):
     return render_to_response('academico/index.html', locals(), context_instance=RequestContext(request))
@@ -41,6 +42,7 @@ def ver_alunos(request,  alunos_id):
     except Alunos.DoesNotExist:
         raise Http404
     return render_to_response('academico/v-alunos.html', locals(), context_instance=RequestContext(request))
+
 
 @login_required(login_url='/academico/entrar/')
 def listar_alunos(request, classe_form, alunos_id=None):
@@ -173,3 +175,31 @@ def listar_curriculos(request, classe_form, cursos_id, curriculos_id=None):
     else:
         form = classe_form(instance=curriculo)
     return render_to_response('academico/l-curriculos.html',  locals(),  context_instance=RequestContext(request))
+
+    #def ver_turmas(request,  turmas_id):
+    #try:
+    #    turmas = Turmas.objects.get(id=turmas_id)
+    #except Turmas.DoesNotExist:
+    #    raise Http404
+    #return render_to_response('academico/v-turmas.html', locals(), context_instance=RequestContext(request)
+
+
+def listar_turmas(request, classe_form, cursos_id, turmas_id=None):
+    titulo = 'Cadastro de Turmas'
+    ver_form = 0
+    curso = Cursos.objects.get(id=cursos_id)
+    turmas = Turmas.objects.filter(cursos_id=cursos_id)
+    if turmas_id:
+        turma = get_object_or_404(classe_form._meta.model, id=turmas_id)
+        ver_form = 1
+    else:
+        turma = None
+    if request.method == 'POST':
+        form = classe_form(request.POST, instance=turma)
+        if form.is_valid():
+            turma = form.save(commit=False)
+            turma.save()
+            return HttpResponseRedirect(turma.get_absolute_url())
+    else:
+        form = classe_form(instance=turma)
+    return render_to_response('academico/l-turmas.html',  locals(),  context_instance=RequestContext(request))

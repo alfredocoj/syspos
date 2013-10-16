@@ -8,12 +8,13 @@ from forms import FormCursos
 from forms import FormAreas
 from forms import FormDisciplinas
 from forms import FormCurriculos
+from forms import FormTurmas
 
 urlpatterns = patterns('',
-	url(r'^$', 'academico.views.home', name='home'),
+    url(r'^$', 'academico.views.home', name='home'),
     url(r'^entrar/$', 'academico.views.entrar'),
     url(r'^sair/$', 'academico.views.sair'),
-	# Alunos
+    # Alunos
     url(r'^alunos/novo/$', 'academico.views.listar_alunos', {'classe_form': FormAlunos}),
     url(r'^alunos/(?P<alunos_id>\d+)/editar/$', 'academico.views.listar_alunos', {'classe_form': FormAlunos}),
     url(r'^alunos/(?P<alunos_id>\d+)/$', 'academico.views.ver_alunos'),
@@ -40,4 +41,8 @@ urlpatterns = patterns('',
     url(r'^cursos/(?P<cursos_id>\d+)/curriculos/$', 'academico.views.listar_curriculos', {'classe_form': FormCurriculos}),
     # -- Periodos Letivos
     #url(r'^cursos/(?P<cursos_id>\d+)/periodos/$', 'academico.views.listar_periodos'),
+    # -- Turmas
+    url(r'^cursos/(?P<cursos_id>\d+)/turmas/(?P<turmas_id>\d+)/editar/$', 'academico.views.listar_turmas', {'classe_form': FormTurmas}),
+    url(r'^cursos/(?P<cursos_id>\d+)/turmas/$', 'academico.views.listar_turmas', {'classe_form': FormTurmas}),
+
 )

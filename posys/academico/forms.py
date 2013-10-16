@@ -6,10 +6,12 @@ from models import Alunos
 from models import Professores
 from models import Cursos
 
+
 from models import Areas
 from models import Disciplinas
 from models import Curriculos
 from models import PeriodosLetivos
+from models import Turmas
 
 def make_custom_datefield(f):
     formfield = f.formfield()
@@ -82,3 +84,10 @@ class FormCurriculos(forms.ModelForm):
 		model = Curriculos
 	def __init__(self, *args, **kwargs):
 		super(FormCurriculos, self).__init__(*args, **kwargs)
+
+class  FormTurmas(forms.ModelForm):
+	class Meta:
+		model = Turmas
+	def __init__(self, *args, **kwargs):
+		super( FormTurmas, self).__init__(*args, **kwargs)
+		

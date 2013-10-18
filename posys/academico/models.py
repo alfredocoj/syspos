@@ -182,13 +182,24 @@ class Ofertas(models.Model):
 class PeriodosLetivos(models.Model):
     id = models.AutoField(primary_key=True)
     ano = models.CharField(max_length=4L)
-    semestre = models.CharField(max_length=8L)
+    SEMESTRE_PRIMEIRO = 1
+    SEMESTRE_SEGUNDO = 2
+    OPCOES_SEMESTRE = (
+            (SEMESTRE_PRIMEIRO, 'Primeiro'),
+            (SEMESTRE_SEGUNDO, 'Segundo'),
+        )    
+    #semestre = models.CharField(max_length=8L)
+    semestre = models.IntegerField(choices=OPCOES_SEMESTRE, default=SEMESTRE_PRIMEIRO)
     cursos = models.ForeignKey(Cursos)
     dt_inicio = models.DateField()
     dt_fim = models.DateField()
     prazos_entregas = models.DateField(null=True, blank=True)
     class Meta:
         db_table = 'periodos_letivos'
+    def __unicode__(self):
+        return u'%s' % (self.nome)
+    def get_absolute_url(self):
+        return '#'
 
 class Professores(models.Model):
     id = models.AutoField(primary_key=True)

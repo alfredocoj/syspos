@@ -5,11 +5,11 @@
 {% block conteudo %}
 
 <ul class="nav nav-tabs">
-    <li><a href="/academico/cursos/{{curso.id}}/">Geral</a></li>
-    <li class="active"><a href="/academico/cursos/{{curso.id}}/areas/">Áreas</a></li>
+	<li><a href="/academico/cursos/{{curso.id}}/">Geral</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/areas/">Áreas</a></li>
     <li><a href="/academico/cursos/{{curso.id}}/disciplinas/">Disciplinas</a></li>
     <li><a href="/academico/cursos/{{curso.id}}/curriculos/">Curriculos</a></li>
-    <li><a href="/academico/cursos/{{curso.id}}/turmas/">Turmas</a></li>
+    <li class="active"><a href="/academico/cursos/{{curso.id}}/turmas/">Turmas</a></li>
     <li><a href="/academico/cursos/{{curso.id}}/periodos/">Periodos</a></li>
 </ul>
 
@@ -32,24 +32,27 @@
         <table id="tblDados" class="display" cellpadding="0" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th width="90%">Nome</th>
+                    <th width="15%">Ano</th>
+                    <th width="15%">Semestre</th>
                     <th width="15%">Ações</th>
                 </tr>
             </thead>
             <tbody>
-            {% for area in areas %}
+            {% for turma in turmas %}
                 <tr class="{% cycle 'odd' 'even' %}">
-                    <td>{{ area.nome }}</td>
+                    <td>{{ turma.ano }}</td>
+                    <td>{{ turma.semestre }}</td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-small"><i class="icon-edit icon-white"></i></a>
-                        <a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
+                    	<a href="/academico/cursos/{{curso.id}}/turmas/{{turma.id}}/editar/" class="btn btn-warning btn-small"><i class="icon-edit icon-white"></i></a>
+                    	<a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Nome</th>
+                    <th>Ano</th>
+                    <th>Semestre</th>
                     <th>Ações</th>
                 </tr>
             </tfoot>

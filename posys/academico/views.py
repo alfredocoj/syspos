@@ -12,6 +12,7 @@ from academico.models import Disciplinas
 from academico.models import Curriculos
 from academico.models import Cidades
 from academico.models import Turmas
+from academico.models import PeriodosLetivos
 
 def home(request):
     return render_to_response('academico/index.html', locals(), context_instance=RequestContext(request))
@@ -203,3 +204,24 @@ def listar_turmas(request, classe_form, cursos_id, turmas_id=None):
     else:
         form = classe_form(instance=turma)
     return render_to_response('academico/l-turmas.html',  locals(),  context_instance=RequestContext(request))
+
+
+def listar_periodos(request, classe_form, cursos_id, periodos_id=None):
+    titulo = 'Cadastro de Periodos Letivos'
+    ver_form = 0
+    curso = Cursos.objects.get(id=cursos_id)
+    periodos = PeriodosLetivos.objects.filter(cursos_id=cursos_id)
+    if periodos_id:
+        periodo = get_object_or_404(classe_form._meta.model, id=periodos_id)
+        ver_form = 1
+    else:
+        periodo = None
+    if request.method == 'POST':
+        form = classe_form(request.POST, instance=periodo)
+        if form.is_valid():
+            periodo = form.save(commit=False)
+            periodo.save()
+            return HttpResponseRedirect(periodo.get_absolute_url())
+    else:
+        form = classe_form(instance=periodo)
+    return render_to_response('academico/l-periodos.html',  locals(),  context_instance=RequestContext(request))

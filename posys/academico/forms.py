@@ -91,3 +91,12 @@ class  FormTurmas(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super( FormTurmas, self).__init__(*args, **kwargs)
 		
+class FormPeriodosLetivos(forms.ModelForm):
+	formfield_callback = make_custom_datefield
+	class Meta:
+		model = PeriodosLetivos
+	def __init__(self, *args, **kwargs):
+		super( FormPeriodosLetivos, self).__init__(*args, **kwargs)
+		self.fields['dt_inicio'].label = "Data de Inicio"
+		self.fields['dt_fim'].label = "Data de Termino"
+		self.fields['prazos_entregas'].label = "Prazo de Entrega"

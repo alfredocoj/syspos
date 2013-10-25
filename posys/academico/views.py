@@ -123,11 +123,7 @@ def excluir_cursos(request, classe_form, cursos_id):
     ver_form = 0
     cursos = Cursos.objects.get(id=cursos_id)
     cursos.delete()
-    if cursos_id:
-        curso = get_object_or_404(classe_form._meta.model, id=cursos_id)
-        ver_form = 1
-    else:
-        curso = None
+    
     return render_to_response('academico/l-cursos.html',  locals(),  context_instance=RequestContext(request))
 
     #return render_to_response('academico/l-cursos.html',  locals(),  context_instance=RequestContext(request))

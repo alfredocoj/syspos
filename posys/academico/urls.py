@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     # Cursos
     url(r'^cursos/novo/$', 'academico.views.listar_cursos', {'classe_form': FormCursos}),
     url(r'^cursos/(?P<cursos_id>\d+)/editar/$', 'academico.views.listar_cursos', {'classe_form': FormCursos}),
+    url(r'^cursos/(?P<cursos_id>\d+)/excluir/$', 'academico.views.excluir_cursos', {'classe_form': FormCursos}),
     url(r'^cursos/(?P<cursos_id>\d+)/$', 'academico.views.ver_cursos'),
     url(r'^cursos/$', 'academico.views.listar_cursos', {'classe_form': FormCursos}),
     # Detalhes do Curso
@@ -45,6 +46,7 @@ urlpatterns = patterns('',
     url(r'^cursos/(?P<cursos_id>\d+)/turmas/$', 'academico.views.listar_turmas', {'classe_form': FormTurmas}),
     # -- Periodos Letivos
     url(r'^cursos/(?P<cursos_id>\d+)/periodos/(?P<periodos_id>\d+)/editar/$', 'academico.views.listar_periodos', {'classe_form': FormPeriodosLetivos}),
+    url(r'^cursos/(?P<cursos_id>\d+)/periodos/(?P<periodos_id>\d+)/excluir/$', 'academico.views.excluir_periodos', {'classe_form': FormPeriodosLetivos}),
     url(r'^cursos/(?P<cursos_id>\d+)/periodos/$', 'academico.views.listar_periodos', {'classe_form': FormPeriodosLetivos}),
 
 )

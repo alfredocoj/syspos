@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 from academico.models import Alunos
 from academico.models import Professores
@@ -117,6 +118,21 @@ def listar_cursos(request, classe_form, cursos_id=None):
         form = classe_form(instance=curso)
     return render_to_response('academico/l-cursos.html',  locals(),  context_instance=RequestContext(request))
 
+def excluir_cursos(request, classe_form, cursos_id):
+    titulo = 'Cadastro de Cursos'
+    ver_form = 0
+    cursos = Cursos.objects.get(id=cursos_id)
+    cursos.delete()
+    if cursos_id:
+        curso = get_object_or_404(classe_form._meta.model, id=cursos_id)
+        ver_form = 1
+    else:
+        curso = None
+    return render_to_response('academico/l-cursos.html',  locals(),  context_instance=RequestContext(request))
+
+    #return render_to_response('academico/l-cursos.html',  locals(),  context_instance=RequestContext(request))
+
+
 def listar_areas(request, classe_form, cursos_id, areas_id=None):
     titulo = 'Cadastro de Areas'
     ver_form = 0
@@ -224,4 +240,18 @@ def listar_periodos(request, classe_form, cursos_id, periodos_id=None):
             return HttpResponseRedirect(periodo.get_absolute_url())
     else:
         form = classe_form(instance=periodo)
+    return render_to_response('academico/l-periodos.html',  locals(),  context_instance=RequestContext(request))
+
+
+def excluir_periodos(request, classe_form, cursos_id, periodos_id=None):
+    #titulo = 'Cadastro de Periodos Letivos'
+    #ver_form = 0
+    cursos = Cursos.objects.get(id=cursos_id)
+    #periodos = PeriodosLetivos.objects.get(id=periodos_id)
+    periodos = PeriodosLetivos.objects.filter(cursos_id=cursos_id).delete()
+    #p = cursos.objects.filter()
+    #p.delete()
+    #periodos = PeriodosLetivos.objects.get(id=periodos_id)
+    #periodos.delete()
+    
     return render_to_response('academico/l-periodos.html',  locals(),  context_instance=RequestContext(request))

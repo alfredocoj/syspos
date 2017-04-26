@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+
+	{% if form.errors %}
+		<p>Suas informações não conferem. Por-favor tente novamente.</p>
+	{% endif %}
+
+	<form action="/academico/entrar/" method="post" accept-charset="UTF-8">
+		{% csrf_token %}
+		<table class="form">
+			<tr>
+			    <td><label for="username">Usuário:</label></td>
+			    <td><input id="username" style="margin-bottom: 15px;" type="text" name="username" size="30" /></td>
+			</tr>
+			<tr>
+			    <td><label for="password">Senha:</label></td>
+			    <td><input id="password" style="margin-bottom: 15px;" type="password" name="password" size="30" /></td>
+			</tr>
+		</table>
+		<input id="remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" />
+		<label class="string optional" for="user_remember_me"> Lembre de mim</label>
+		<input class="btn btn-primary" type="submit" name="commit" value="Entrar" />
+        <input type="hidden" name="next" value="/academico/" />
+	</form>
+{% endblock %}

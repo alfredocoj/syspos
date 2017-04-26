@@ -1,0 +1,31 @@
+{% load url from future %}
+<form method="post" action="{% url login %}">
+    {% csrf_token %}
+    <div id="frmLogin" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>{{ titulo }}</h3>
+        </div>
+        <div class="modal-body">
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <table class="form" >
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Entrar"/>
+            <input type="reset" class="btn" value="Limpar"/>
+            <input type="hidden" name="next" value="{{ next }}" />
+            <a href="#" class="btn" data-dismiss="modal">Fechar</a>
+        </div>
+    </div>
+</form>

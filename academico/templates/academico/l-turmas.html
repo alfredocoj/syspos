@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalhes do Curso - {{curso.nome}}{% endblock %}
+
+{% block conteudo %}
+
+<ul class="nav nav-tabs">
+	<li><a href="/academico/cursos/{{curso.id}}/">Geral</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/areas/">Áreas</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/disciplinas/">Disciplinas</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/curriculos/">Curriculos</a></li>
+    <li class="active"><a href="/academico/cursos/{{curso.id}}/turmas/">Turmas</a></li>
+    <li><a href="/academico/cursos/{{curso.id}}/periodos/">Periodos</a></li>
+</ul>
+
+<link href="{{ MEDIA_URL }}styles/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+
+<style type="text/css" title="currentStyle">
+    @import "{{ MEDIA_URL }}datatables/css/demo_page.css";
+    @import "{{ MEDIA_URL }}datatables/css/demo_table.css";
+    @import "{{ MEDIA_URL }}datatables/css/jquery.dataTables.css";
+</style>
+
+<div id="content">
+    <p>
+        <a href="#frmModal" class="btn btn-primary" data-toggle="modal">
+            <i class="icon-plus icon-white"></i> Incluir
+        </a>
+    </p>
+    <hr/>
+    <div id="dynamic">
+        <table id="tblDados" class="display" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th width="55%">Ano</th>
+                    <th width="15%">Semestre</th>
+                    <th width="15%">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for turma in turmas %}
+                <tr class="{% cycle 'odd' 'even' %}">
+                    <td>{{ turma.ano }}</td>
+                    <td>{{ turma.semestre }}</td>
+                    <td>
+                    	<a href="/academico/cursos/{{curso.id}}/turmas/{{turma.id}}/editar/" class="btn btn-warning btn-small"><i class="icon-edit icon-white"></i></a>
+                    	<a href="#" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Ano</th>
+                    <th>Semestre</th>
+                    <th>Ações</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    {% include "cadastros.html" %}
+</div>
+  
+{% endblock %}
